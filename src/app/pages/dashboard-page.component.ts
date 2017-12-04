@@ -1,6 +1,8 @@
 /////<reference path="" />
 
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database'
+import 'rxjs/add/operator/take'
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,11 +10,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-page.component.css']
 })
 export class DashboardPageComponent implements OnInit {
-
+    public showme: boolean = true;
     private age: number = 30;
     public title: String | Number;
-    constructor() {
-        this.age = 30;
+    constructor(private db: AngularFireDatabase) {
+        const observable = this.db.object('name');
+        observable
+            .take(2)
+            .subscribe(
+            next => {
+                console.log('next', next);
+                //this.title = next;
+            },
+            error => console.log('error', error),
+            () => console.log('done')
+        );
     }
     startGame() {
         console.log("click start game");
@@ -33,6 +45,8 @@ export class DashboardPageComponent implements OnInit {
         this.title = "Barber Now";
         
         document.getElementById("showtitle").addEventListener('click', this.startGame);
-  }
+    }
+
+
 
 }

@@ -1,4 +1,5 @@
-import {BrowserModule} from "@angular/platform-browser";
+//import 'hummerjs';
+import { BrowserModule } from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
@@ -21,6 +22,14 @@ import {LoginPageComponent} from "./pages/login-page.component";
 import { LoggedInGuard } from "app/shared/logged-in-guard";
 import { DashboardPageComponent } from './pages/dashboard-page.component';
 
+//material design 2
+//import { MaterialModule } from 'MaterialModule';//'@angular/material'
+//import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
+//import { FlexLayoutModule } from '@angular/flex-layout';
+import { CompanyEditComponent } from './company/company-edit/company-edit.component';
+import { CompanyAddComponent } from './company/company-add/company-add.component';
+import { CompanyDetailComponent } from './company/company-detail/company-detail.component'
+
 const routes: Routes = [
     { path: 'register', component: RegisterPageComponent },
     { path: 'all-in-one', component: AllInOnePageComponent },
@@ -41,7 +50,10 @@ const routes: Routes = [
         RegisterPageComponent,
         AllInOnePageComponent,
         LoginPageComponent,
-        DashboardPageComponent
+        DashboardPageComponent,
+        CompanyEditComponent,
+        CompanyAddComponent,
+        CompanyDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -51,6 +63,9 @@ const routes: Routes = [
         AlertModule.forRoot(),
         AngularFireModule.initializeApp(firebaseConfig, "barbernow"),
         AngularFireDatabaseModule,
+        //MaterialModule,
+        //BrowserAnimationsModule,
+        //FlexLayoutModule,
         AngularFireAuthModule,
         RouterModule.forRoot(routes)
     ],

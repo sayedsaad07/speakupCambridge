@@ -31,3 +31,22 @@ Technologies in use
 Angularfire2
 firebase
 RXJS
+
+GIT
+git remote add origin https://github.com/sayedsaad07/speakupCambridge.git
+git push -u origin master
+
+Following: 
+https://github.com/duncanhunter/AngularFireCourse
+
+Firebase
+npm install firebase-tools -g
+firebase init
+
+npm install @angular/material @angular/animations @angular/flex-layout hummerjs --save
+
+generate components
+    ng g c company/company-detail --spec false
+
+Angular firebase ref:
+    https://github.com/duncanhunter/AngularFireCourse/tree/m5-finish

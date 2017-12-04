@@ -1,7 +1,28 @@
-<p>
-    {{title}}
-  testing my new firebase app <br/>
-  no need to add more modules at this moment
- <button  id="showtitle"  class="btn" >Start Game</button>
-    
+<p *ngIf="showme; then thenblock; else elseblock;">
+
 </p>
+<template #thenblock>
+    <div>
+        <p>            {{title}}
+            testing my new firebase app <br />
+            no need to add more modules at this moment
+            <input #name placeholder="user name" />
+            <button id="showtitle" class="btn"
+                    (click)="userName = name.value">
+                Start Game
+            </button>
+            <br />
+            {{userName}}</p>
+    </div>
+</template>
+<template #elseblock>
+    <p>Sayed Saad is hidden</p>
+</template>
+
+<div>
+    <input [(ngModel)]="favoritesong"/>
+    {{favoritesong}}
+</div>
+<app-company-edit [name]="favoritesong">
+    <p>Show data from child company</p>
+</app-company-edit>
