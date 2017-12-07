@@ -1,8 +1,8 @@
-import {Injectable, Inject} from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import * as firebase from 'firebase/app';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
-import {UserInfo} from "./user-info";
+import { UserInfo } from "./user-info";
 import { Observable, Subject, BehaviorSubject } from "rxjs";
 
 @Injectable()
@@ -66,8 +66,8 @@ export class AuthService {
 
     updateDisplayName(displayName: string): Observable<string> {
         let result = new Subject<string>();
-        this.user.updateProfile({displayName: displayName, photoURL: null})
-            .then(() => {result.next("success")})
+        this.user.updateProfile({ displayName: displayName, photoURL: null })
+            .then(() => { result.next("success") })
             .catch(err => result.error(err));
         return result;
     }
@@ -77,7 +77,7 @@ export class AuthService {
         this.angularFireAuth.authState.subscribe(user => {
             // console.log("Update: ", user);
             if (user != null) {
-                user.updateProfile({displayName: displayName, photoURL: null});
+                user.updateProfile({ displayName: displayName, photoURL: null });
             }
         });
         this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -101,10 +101,10 @@ export class AuthService {
     updatePassword(password: string): Observable<string> {
         let result = new Subject<string>();
         this.user.updatePassword(password)
-                .then(a => {
-                    result.next("success");
-                })
-                .catch(err => result.error(err));
+            .then(a => {
+                result.next("success");
+            })
+            .catch(err => result.error(err));
         return result.asObservable();
     }
 

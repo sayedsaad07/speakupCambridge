@@ -3,8 +3,11 @@ import { TodoTask } from '../todotask';
 import { TodolistService } from '../todolist.service';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../shared/auth.service';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
 
 @Component({
     selector: 'app-task-edit',
@@ -13,6 +16,7 @@ import 'rxjs/add/observable/of';
 })
 export class TaskEditComponent implements OnInit {
 
+    userid: string;
 
     currentTask: FirebaseObjectObservable<TodoTask> | Observable<string>;
     isNewTask: boolean;
@@ -21,7 +25,8 @@ export class TaskEditComponent implements OnInit {
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private todolistsvc: TodolistService) {
+        private todolistsvc: TodolistService,
+        private authService: AuthService) {
 
     }
 
@@ -29,7 +34,12 @@ export class TaskEditComponent implements OnInit {
         this.taskKey = this.activatedRoute.snapshot.params['id'];
         this.isNewTask = this.taskKey === 'new' || this.taskKey === "";
         !this.isNewTask ? this.getCompany() : this.currentTask = Observable.of({}) as FirebaseObjectObservable<TodoTask>;
+        this.authService.currentUser().subscribe(u => this.userid = u.uid);;;
+        console.log("user id " + this.userid);
     }
+
+
+
 
     getCompany() {
         this.currentTask = this.todolistsvc.gettask(this.taskKey);
@@ -37,6 +47,8 @@ export class TaskEditComponent implements OnInit {
     }
 
     saveTask(task: TodoTask) {
+        task.userid = this.userid;
+        console.log("user id " + this.userid);
         console.log("is new task " + this.isNewTask);
         console.log("task name " + task.name);
         const save = this.isNewTask
