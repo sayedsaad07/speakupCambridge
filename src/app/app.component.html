@@ -10,6 +10,7 @@
             <ul class="nav navbar-nav">
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['']">Home</a></li>
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['dashboard']" *ngIf="(isLoggedIn|async)">Dashboard</a></li>
+                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['app-todolist']" *ngIf="(isLoggedIn|async)">To Do List</a></li>
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a
                         [routerLink]="['all-in-one']" *ngIf="!(isLoggedIn|async)">All In One</a></li>
             </ul>

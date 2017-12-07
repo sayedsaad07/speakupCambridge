@@ -1,0 +1,37 @@
+<p>
+    todolist works!
+</p>
+<div class="row">
+    <a class="btn btn-primary"
+       [routerLink]="['/app-task-edit', 'new']">Add Task</a>
+    <a class="btn btn-primary"
+       (click)="showDoneOnly()">Show Done Task</a>
+    <a class="btn btn-primary"
+       (click)="showAll()">Show All</a>
+</div>
+<div>
+    <table class="table table-inverse table-striped table-bordered" >
+        <thead class="thead-inverse">
+            <tr>
+                <th>Task</th>
+                <th>Details </th>
+                <th>Starts On </th>
+                <th>Ends On </th>
+                <th>Done</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let task of tasklist | async" fxLayoutAlign="space-between center">
+            <tr>
+                <td>{{task.name}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.startdate | date:"MM/dd/yyyy 'at' h:mma"}}</td>
+                <td>{{task.enddate | date:"MM/dd/yyyy 'at' h:mma"}}</td>
+                <td> <input type="checkbox" [ngModel]="task.isDone" disabled="disabled" /> </td>
+                <!--<td> <a class="btn btn-primary"  (click)="saveTask(task)">Save</a> </td>-->
+                <td> <a class="btn btn-primary"
+                        [routerLink]="['/app-task-edit', task.$key]" >Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

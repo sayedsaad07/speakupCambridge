@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FirebaseObjectObservable, FirebaseListObservable, AngularFireDatabase } from "angularfire2/database";
 
 @Injectable()
-export class CompanyService {
+export class ReviewsService {
     company$: FirebaseObjectObservable<any>;
 
 
