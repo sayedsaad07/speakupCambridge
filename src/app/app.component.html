@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" [routerLink]="['']">barbernow</a>
+            <a class="navbar-brand" [routerLink]="['']">Speak-Up Cambridge</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -11,6 +11,9 @@
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['']">Home</a></li>
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['dashboard']" *ngIf="(isLoggedIn|async)">Dashboard</a></li>
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['app-todolist']" *ngIf="(isLoggedIn|async)">To Do List</a></li>
+                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['app-event-list']" *ngIf="(isLoggedIn|async)">Speak Up Events</a></li>
+                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['app-speak-up-cambridge-host']" *ngIf="(isLoggedIn|async)">Timer</a></li>
+
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a
                         [routerLink]="['all-in-one']" *ngIf="!(isLoggedIn|async)">All In One</a></li>
             </ul>

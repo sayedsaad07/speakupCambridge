@@ -6,13 +6,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'app-todolist',
-  templateUrl: './todolist.component.html',
-  styleUrls: ['./todolist.component.css']
+    selector: 'app-todolist',
+    templateUrl: './todolist.component.html',
+    styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent implements OnInit {
 
     tasklist: FirebaseListObservable<TodoTask[]> | Observable<string>;
+
+    totaltime: any = "00:00";
+
     constructor(private todolistsvc: TodolistService) {
 
         //var task = new TodoTask("running", "plan for a long run", "12/12/2012", "12/12/2012", false);
@@ -27,8 +30,7 @@ export class TodolistComponent implements OnInit {
         this.getTaskList();
     }
 
-    getTaskList()
-    {
+    getTaskList() {
         this.tasklist = this.todolistsvc.gettodolist();
     }
 
@@ -44,4 +46,9 @@ export class TodolistComponent implements OnInit {
     showAll() {
         this.getTaskList();
     }
+
+
 }
+
+
+

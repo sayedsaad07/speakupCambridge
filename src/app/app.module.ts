@@ -21,6 +21,8 @@ import { AllInOnePageComponent } from "./pages/all-in-one-page.component";
 import { LoginPageComponent } from "./pages/login-page.component";
 import { LoggedInGuard } from "app/shared/logged-in-guard";
 import { DashboardPageComponent } from './pages/dashboard-page.component';
+import { AppTimerService } from './_shared/app-timer.service';
+import { AddonTimerComponent } from './_shared/addon-timer/addon-timer.component'
 
 //material design 2
 //import { MaterialModule } from 'MaterialModule';//'@angular/material'
@@ -30,6 +32,10 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
 import { CompanyAddComponent } from './company/company-add/company-add.component';
 import { CompanyDetailComponent } from './company/company-detail/company-detail.component';
 import { TaskEditComponent , TodolistComponent, TodolistService } from './todolist/todolist.index';
+//add SpeakUpCambridgeModule
+//import { SpeakUpCambridgeModule } from './SpeakUpCambridge/speak-up-cambridge/speak-up-cambridge.module';
+import { SpeakUpCambridgeHostComponent } from './SpeakUpCambridge/speak-up-cambridge/speak-up-cambridge-host/speak-up-cambridge-host.component';
+import { EventListComponent, EventEditComponent, EventAttendeeComponent, EventListService } from  './SpeakUpCambridge/event-list.index';
 
 const routes: Routes = [
     { path: 'register', component: RegisterPageComponent },
@@ -41,6 +47,11 @@ const routes: Routes = [
     {
         path: 'app-task-edit/:id', component: TaskEditComponent, canActivate: [LoggedInGuard]
     },
+    {
+        path: 'app-speak-up-cambridge-host', component: SpeakUpCambridgeHostComponent, canActivate: [LoggedInGuard]
+    },
+    { path: 'app-event-list', component: EventListComponent, canActivate: [LoggedInGuard] },
+    { path: 'app-event-edit/:id', component: EventEditComponent, canActivate: [LoggedInGuard] },
     { path: '', component: HomePageComponent }
 ];
 
@@ -60,7 +71,15 @@ const routes: Routes = [
         CompanyAddComponent,
         CompanyDetailComponent,
         TodolistComponent,
-        TaskEditComponent
+        TaskEditComponent,
+        //speak-up feature
+        SpeakUpCambridgeHostComponent,
+        EventEditComponent,
+        EventListComponent,
+        EventAttendeeComponent,
+        AddonTimerComponent
+        //EventListComponent,
+        //EventEditComponent
     ],
     imports: [
         BrowserModule,
@@ -75,8 +94,11 @@ const routes: Routes = [
         //FlexLayoutModule,
         AngularFireAuthModule,
         RouterModule.forRoot(routes)
+        //load speak up cambridge module
+        //, SpeakUpCambridgeModule.forRoot()
     ],
-    providers: [AuthService, LoggedInGuard , TodolistService],
+    providers: [AuthService, LoggedInGuard, TodolistService
+        , EventListService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

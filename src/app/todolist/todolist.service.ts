@@ -62,4 +62,30 @@ export class TodolistService {
         return Observable.throw(error.message);
     }
 
+    public timeStart: number;
+    start() {
+        this.timeStart = new Date().getTime();
+    }
+    getSeconds() {
+        const seconds = Math.ceil((new Date().getTime() - this.timeStart) / 1000) + 's';
+        return seconds;
+    }
+    getMinutes() {
+        const ms = (new Date().getTime() - this.timeStart) + 'ms';
+        return ms;
+    }
+    getCurrentTime(): any {
+        return {
+            /** <integer>s e.g 2s etc. */
+            get seconds() {
+                const seconds = Math.ceil((new Date().getTime() - this.timeStart) / 1000) + 's';
+                return seconds;
+            },
+            /** Milliseconds e.g. 2000ms etc. */
+            get ms() {
+                const ms = (new Date().getTime() - this.timeStart) + 'ms';
+                return ms;
+            }
+        }
+    }
 }
