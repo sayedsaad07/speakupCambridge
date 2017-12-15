@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { speakUpEvent } from '../speakUpEvent';
 import { EventListService } from '../event-list.service';
+import { EventAudianceService } from '../event-audiance.service';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../shared/auth.service';
@@ -12,7 +13,8 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'app-event-edit',
   templateUrl: './event-edit.component.html',
-  styleUrls: ['./event-edit.component.css']
+  styleUrls: ['./event-edit.component.css'],
+  providers: [EventAudianceService]
 })
 export class EventEditComponent implements OnInit {
 

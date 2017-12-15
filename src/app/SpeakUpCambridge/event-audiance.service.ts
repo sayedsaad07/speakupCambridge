@@ -33,18 +33,19 @@ export class EventAudianceService {
         //this.speakUpEvent$ = this.db.object('speakUpEvent');
     }
 
-    getSpeakupEvent(eventKey: string) {
-        return this.db.object(`eventList/${eventKey}`)
+    getCurrentAttendee(attendeeKey: string) {
+        return this.db.object(`speakUpEventAudienace/${attendeeKey}`)
             .catch(this.errorHandler);
     }
 
-    getSpeakupEventList(eventKey: string) {
+    geteventAudienceList(eventKey: string) {
         return this.speakUpEventAudienace$
-            .map(_tasks => _tasks.filter(t => t.$eventkey === eventKey))
+            .map(_tasks => _tasks.filter(t => t.eventkey === eventKey))
             .catch(this.errorHandler);
     }
 
     saveSpeakupEvent(_eventAudience: eventAudience) {
+        console.log("load with Event Key" + _eventAudience.eventkey + " Ateendee key " + _eventAudience.$key);
         return this.speakUpEventAudienace$.push(_eventAudience)
             .then(_ => console.log('success'))
             .catch(error => console.log(error));

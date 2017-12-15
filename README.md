@@ -1,4 +1,14 @@
 SpeakupCambridge
+Yaa finally finished my speak up cambridge event. Now It's time to inspire my teammates.
+In a high level, it's a speak up cambridge toostmaster meetup. this tool will help my team monitor speech duration instead of using their mobile stop watch.
+Also we could monitor our performance throughout the year.
+
+list of events
+edit events
+add speakers
+monitor speech duration
+
+Learned a lot about angular2 components collaporations.
 
 This project was generated with Angular CLI version 1.4.9.
 

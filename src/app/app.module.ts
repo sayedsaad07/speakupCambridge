@@ -36,6 +36,7 @@ import { TaskEditComponent , TodolistComponent, TodolistService } from './todoli
 //import { SpeakUpCambridgeModule } from './SpeakUpCambridge/speak-up-cambridge/speak-up-cambridge.module';
 import { SpeakUpCambridgeHostComponent } from './SpeakUpCambridge/speak-up-cambridge/speak-up-cambridge-host/speak-up-cambridge-host.component';
 import { EventListComponent, EventEditComponent, EventAttendeeComponent, EventListService } from  './SpeakUpCambridge/event-list.index';
+import { EventAttendeeEditComponent } from './SpeakUpCambridge/event-attendee-edit/event-attendee-edit.component';
 
 const routes: Routes = [
     { path: 'register', component: RegisterPageComponent },
@@ -77,7 +78,8 @@ const routes: Routes = [
         EventEditComponent,
         EventListComponent,
         EventAttendeeComponent,
-        AddonTimerComponent
+        AddonTimerComponent,
+        EventAttendeeEditComponent
         //EventListComponent,
         //EventEditComponent
     ],

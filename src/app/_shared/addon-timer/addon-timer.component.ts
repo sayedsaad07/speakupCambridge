@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { AppTimerService } from '../app-timer.service';
 import { Timerinfo } from '../Timerinfo';
 
@@ -12,9 +12,18 @@ export class AddonTimerComponent implements OnInit {
 
     @Output() onDatePicked: EventEmitter<Timerinfo> = new EventEmitter<Timerinfo>();
     isstarted: boolean;
-    
     startstopstr: string = "Start";
     _Timerinfo: Timerinfo;//string= "00:00";
+    private _startWith: string;
+
+    @Input("latestTimer")
+    set startWith(startit: string) {
+        this._startWith = startit;
+        this._Timerinfo.ticks = this._startWith;
+    }
+    get startWith(): string { return this._startWith; }
+
+
     constructor(private _AppTimerService: AppTimerService) {
         this._Timerinfo = this._AppTimerService._Timerinfo;
         //console.log("Component side ticks " + this._Timerinfo.ticks);

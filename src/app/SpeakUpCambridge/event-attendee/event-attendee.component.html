@@ -1,3 +1,36 @@
-<p>
-  event-attendee works!
-</p>
+
+<a class="btn btn-primary"
+   (click)="AddNewAttendee()" >Add Attendee</a>
+<div>
+    <table class="table table-inverse table-striped table-bordered">
+        <thead class="thead-inverse">
+            <tr>
+                <th>subject</th>
+                <th>topic </th>
+                <th>name </th>
+                <th>email </th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let currentAttendee of eventAttendeeList | async" fxLayoutAlign="space-between center">
+            <tr>
+                <td>{{currentAttendee.subject}}</td>
+                <td>{{currentAttendee.topic}}</td>
+                <td>{{currentAttendee.name </td>
+                <td>{{currentAttendee.email </td>
+                <td>{{currentAttendee.speechDuration}}</td>
+                <!--<td>{{currentAttendee.userid}}</td>-->
+                <td> <input type="checkbox" [ngModel]="currentAttendee.showup" disabled="disabled" /> </td>
+                <!--<td> <a class="btn btn-primary"  (click)="saveEvent(currentAttendee)">Save</a> </td>-->
+                <td>
+                    <a class="btn btn-primary"
+                       (click)="editEventAttendee(currentAttendee.$key)">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <app-event-attendee-edit [eventKey]="eventKey" [attendeeKey_Input]="currentAttendeeKey" ></app-event-attendee-edit>
+    
+</div>

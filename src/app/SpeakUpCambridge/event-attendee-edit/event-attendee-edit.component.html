@@ -1,0 +1,61 @@
+
+<div *ngIf="currentAttendee | async as attendee">
+    <div>
+        <table>
+            <tr>
+                <td>
+                    Name:
+                </td>
+                <td>
+                    <input type="text" [(ngModel)]="attendee.name" />
+                </td>
+            </tr>
+            <tr>
+                <td> Description </td>
+                <td>
+                    <!--<textarea  [(ngModel)]="attendee.description"  spellcheck="true" wrap="soft" rows="2" cols="1"/>-->
+                    <input type="text" [(ngModel)]="attendee.email" />
+                </td>
+            </tr>
+            <tr>
+                <td> Subkect </td>
+                <td>
+                    <!--<textarea  [(ngModel)]="attendee.description"  spellcheck="true" wrap="soft" rows="2" cols="1"/>-->
+                    <input type="text" [(ngModel)]="attendee.subject" />
+                </td>
+            </tr>
+            <tr>
+                <td> Topic </td>
+                <td>
+                    <!--<textarea  [(ngModel)]="attendee.description"  spellcheck="true" wrap="soft" rows="2" cols="1"/>-->
+                    <input type="text" [(ngModel)]="attendee.topic" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Done
+                </td>
+                <td>
+                    <input type="checkbox" [(ngModel)]="attendee.showup" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Time
+                </td>
+                <td>
+                    <app-addon-timer [latestTimer]="attendee.speechDuration" (onDatePicked)="setspeechDuration($event , attendee)"></app-addon-timer>
+                    {{attendee.speechDuration}}
+                </td>
+            </tr>
+        </table>
+
+        <a class="btn btn-primary" (click)="saveSpeakupEvent(attendee)">Save</a>
+        <a class="btn btn-primary" (click)="removeSpeakupEvent(attendee)" *ngIf="!isNewEvent">Remove</a>
+        <!--<a class="btn btn-primary"
+           [routerLink]="['/app-event-list']">Home</a>-->
+    </div>
+    
+</div>
+
+

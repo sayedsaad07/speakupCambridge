@@ -1,4 +1,5 @@
-
+<a class="btn btn-primary"
+   [routerLink]="['/app-event-list']">Home</a>
 <div *ngIf="currentEvent | async as speakupEvent">
     <div>
         <table>
@@ -43,11 +44,12 @@
 
         <a class="btn btn-primary" (click)="saveSpeakupEvent(speakupEvent)">Save</a>
         <a class="btn btn-primary" (click)="removeSpeakupEvent(speakupEvent)" *ngIf="!isNewEvent">Remove</a>
-        <a class="btn btn-primary"
-           [routerLink]="['/app-event-list']">Home</a>
+       
     </div>
     <div>
         <!--<a class="btn btn-primary" (click)="getAttendee(speakupEvent)">Show Attendee</a>-->
+        <h1>Participation</h1>
+        <app-event-attendee [speakupeventKey_Input]="speakupEvent.$key" ></app-event-attendee>
     </div>
 </div>
 
