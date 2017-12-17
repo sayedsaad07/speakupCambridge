@@ -24,7 +24,7 @@ export class EventAttendeeComponent implements OnInit {
     speakupeventKey_Routing: string;
     @Input() speakupeventKey_Input: string;
     eventKey: string;
-    private currentAttendeeKey: string = 'new';
+    private currentAttendeeKey: string = '';
 
     constructor(private _EventAudianceService: EventAudianceService
         , private router: Router

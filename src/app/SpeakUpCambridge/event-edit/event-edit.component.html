@@ -2,7 +2,7 @@
    [routerLink]="['/app-event-list']">Home</a>
 <div *ngIf="currentEvent | async as speakupEvent">
     <div>
-        <table>
+        <table class="table table-responsive table-striped" >
             <tr>
                 <td>
                     Name:
@@ -48,7 +48,7 @@
     </div>
     <div>
         <!--<a class="btn btn-primary" (click)="getAttendee(speakupEvent)">Show Attendee</a>-->
-        <h1>Participation</h1>
+        <h1>Speakers</h1>
         <app-event-attendee [speakupeventKey_Input]="speakupEvent.$key" ></app-event-attendee>
     </div>
 </div>

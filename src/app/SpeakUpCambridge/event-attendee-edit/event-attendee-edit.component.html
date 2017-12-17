@@ -1,7 +1,7 @@
 
-<div *ngIf="currentAttendee | async as attendee">
-    <div>
-        <table>
+<div *ngIf="isAvailable" >
+    <div *ngIf="currentAttendee | async as attendee">
+        <table class="table table-striped">
             <tr>
                 <td>
                     Name:
@@ -28,7 +28,11 @@
                 <td> Topic </td>
                 <td>
                     <!--<textarea  [(ngModel)]="attendee.description"  spellcheck="true" wrap="soft" rows="2" cols="1"/>-->
-                    <input type="text" [(ngModel)]="attendee.topic" />
+                    <select [(ngModel)]="attendee.topic">
+                        <option *ngFor="let topic of sessions" value={{topic}}>
+                            {{topic}}
+                        </option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -45,7 +49,6 @@
                 </td>
                 <td>
                     <app-addon-timer [latestTimer]="attendee.speechDuration" (onDatePicked)="setspeechDuration($event , attendee)"></app-addon-timer>
-                    {{attendee.speechDuration}}
                 </td>
             </tr>
         </table>

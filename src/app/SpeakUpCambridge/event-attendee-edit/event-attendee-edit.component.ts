@@ -18,7 +18,8 @@ import { Timerinfo } from "app/_shared/Timerinfo";
     styleUrls: ['./event-attendee-edit.component.css']
 })
 export class EventAttendeeEditComponent implements OnInit {
-
+    isAvailable: boolean = false;
+    sessions: string[] = ["Table Topic", "round robin", "speech", "Evaluation"];
     userid: string;
     currentAttendee: FirebaseObjectObservable<eventAudience> | Observable<string>;
     isNewEvent: boolean;
@@ -32,6 +33,10 @@ export class EventAttendeeEditComponent implements OnInit {
     set attendeeKey_Input(name: string) {
         this._attendeeKey_Input = name;
         this.ReloadAttendeeDetails();
+        if (name === "new" || name.length > 3) {
+            this.isAvailable = true;
+        }
+        console.log("input name " + this._attendeeKey_Input);
     }
     get attendeeKey_Input(): string {
         return this._attendeeKey_Input;
@@ -48,7 +53,7 @@ export class EventAttendeeEditComponent implements OnInit {
         this.ateendeeKey_routing = this.activatedRoute.snapshot.params['id'];
         this.ReloadAttendeeDetails();
         this.authService.currentUser().subscribe(u => this.userid = u.uid);;;
-
+        this.isAvailable = false;
     }
     ReloadAttendeeDetails() {
         this.attendeeKey = this._attendeeKey_Input;
@@ -71,13 +76,15 @@ export class EventAttendeeEditComponent implements OnInit {
             ? this._EventAudianceService.saveSpeakupEvent(_eventAudience)
             : this._EventAudianceService.editSpeakupEvent(_eventAudience);
         //save.then(_ => this.router.navigate([`app-event-list`]));
-        this.attendeeKey_Input = "new";
+        //this.attendeeKey_Input = "new";
+        this.isAvailable = false;
     }
 
     removeSpeakupEvent(_eventAudience: eventAudience) {
         const save = this._EventAudianceService.removeSpeakupEvent(_eventAudience);
         //save.then(_ => this.router.navigate([`app-event-list`]));
-        this.attendeeKey_Input = "new";
+        //this.attendeeKey_Input = "new";
+        this.isAvailable = false;
     }
 
     public setspeechDuration(data: Timerinfo, attendee: eventAudience): void {

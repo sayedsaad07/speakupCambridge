@@ -2,14 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app",
     "\\src\\app\\SpeakUpCambridge",
     "\\src\\app\\SpeakUpCambridge\\event-attendee",
+    "\\src\\app\\SpeakUpCambridge\\event-attendee-edit",
     "\\src\\app\\SpeakUpCambridge\\event-edit",
-    "\\src\\app\\SpeakUpCambridge\\event-list",
-    "\\src\\app\\SpeakUpCambridge\\speak-up-cambridge\\speak-up-cambridge-host",
-    "\\src\\app\\todolist",
-    "\\src\\app\\todolist\\task-edit"
+    "\\src\\app\\SpeakUpCambridge\\event-list"
   ],
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }
