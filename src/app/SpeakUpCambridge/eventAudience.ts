@@ -27,6 +27,8 @@ export class eventAudience {
         this.subject = subject;
         this.topic = topic;
         this.speechDuration = speechDuration;
+        if (this.speechDuration === null || this.speechDuration === undefined || this.speechDuration === '')
+            this.speechDuration = "mm:SS";
         this.showup = showup;
         user === null
             ? this.userid = this.sayedsaaduserkey

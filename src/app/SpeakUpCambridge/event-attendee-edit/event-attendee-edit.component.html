@@ -1,64 +1,78 @@
 
-<div *ngIf="isAvailable" >
-    <div *ngIf="currentAttendee | async as attendee">
-        <table class="table table-striped">
-            <tr>
-                <td>
-                    Name:
-                </td>
-                <td>
-                    <input type="text" [(ngModel)]="attendee.name" />
-                </td>
-            </tr>
-            <tr>
-                <td> Description </td>
-                <td>
+<div *ngIf="isAvailable">
+    <table class="table table-inverse table-striped table-bordered" *ngIf="currentAttendee | async as attendee">
+        <tr class="small-12 columns">
+            <td>
+                <label for="name">
+                    Name
+                    <input #name="ngModel" type="text" id="name" name="name" required
+                           [(ngModel)]="attendee.name" />
+                </label>
+                <div [hidden]="name.valid || name.pristine" class="alert callout">
+                    speaker name is required!
+                </div>
+            </td>
+        </tr>
+        <tr class="small-12 columns">
+            <td>
+                <label for="email">
+                    Email
+                    <input #email="ngModel" type="text" id="email" name="email" required
+                           [(ngModel)]="attendee.email" />
+                </label>
+                <div [hidden]="email.valid || email.pristine" class="alert callout">speaker email is required!</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="topic">
+                    Session
                     <!--<textarea  [(ngModel)]="attendee.description"  spellcheck="true" wrap="soft" rows="2" cols="1"/>-->
-                    <input type="text" [(ngModel)]="attendee.email" />
-                </td>
-            </tr>
-            <tr>
-                <td> Subkect </td>
-                <td>
-                    <!--<textarea  [(ngModel)]="attendee.description"  spellcheck="true" wrap="soft" rows="2" cols="1"/>-->
-                    <input type="text" [(ngModel)]="attendee.subject" />
-                </td>
-            </tr>
-            <tr>
-                <td> Topic </td>
-                <td>
-                    <!--<textarea  [(ngModel)]="attendee.description"  spellcheck="true" wrap="soft" rows="2" cols="1"/>-->
-                    <select [(ngModel)]="attendee.topic">
+                    <select class="selectpicker" data-style="btn-info"
+                            #topic="ngModel" id="topic" name="topic" required
+                            [(ngModel)]="attendee.topic">
                         <option *ngFor="let topic of sessions" value={{topic}}>
                             {{topic}}
                         </option>
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Done
-                </td>
-                <td>
-                    <input type="checkbox" [(ngModel)]="attendee.showup" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Time
-                </td>
-                <td>
-                    <app-addon-timer [latestTimer]="attendee.speechDuration" (onDatePicked)="setspeechDuration($event , attendee)"></app-addon-timer>
-                </td>
-            </tr>
-        </table>
+                </label>
+                <div [hidden]="topic.valid || topic.pristine" class="alert callout">Session type is required!</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="subject">
+                    Title
+                    <input #subject="ngModel" type="text" id="subject" name="subject" required
+                           [(ngModel)]="attendee.subject" />
+                </label>
+                <div [hidden]="subject.valid || subject.pristine" class="alert callout">Speech title is required!</div>
+            </td>
+        </tr>
 
-        <a class="btn btn-primary" (click)="saveSpeakupEvent(attendee)">Save</a>
-        <a class="btn btn-primary" (click)="removeSpeakupEvent(attendee)" *ngIf="!isNewEvent">Remove</a>
-        <!--<a class="btn btn-primary"
-           [routerLink]="['/app-event-list']">Home</a>-->
-    </div>
-    
+        <tr>
+            <td>
+                <label for="showup">Is Here</label>
+                <input name="showup" type="checkbox" [(ngModel)]="attendee.showup" />
+            </td>
+        </tr>
+        <tr class="center">
+            <td>
+                Timer &nbsp; &nbsp;
+
+                <!--</td>
+    <td>-->
+                <app-addon-timer name="speechDuration" [latestTimer]="attendee.speechDuration" (onDatePicked)="setspeechDuration($event , attendee)"></app-addon-timer>
+
+            </td>
+        </tr>
+        <tr class="small-12 columns">
+            <td>
+                <a class="btn btn-primary" (click)="saveSpeakupEvent(attendee)">Save</a>
+                <a class="btn btn-primary" (click)="removeSpeakupEvent(attendee)" *ngIf="!isNewEvent">Remove</a>
+            </td>
+        </tr>
+    </table>
 </div>
 
 

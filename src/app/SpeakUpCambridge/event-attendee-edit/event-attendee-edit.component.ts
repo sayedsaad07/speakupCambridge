@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import { Timerinfo } from "app/_shared/Timerinfo";
+import { Subject } from 'rxjs/Subject';
 
 @Component({
     selector: 'app-event-attendee-edit',
@@ -29,18 +30,15 @@ export class EventAttendeeEditComponent implements OnInit {
     attendeeKey: string;
     @Input() eventKey: string;
 
-    @Input()
-    set attendeeKey_Input(name: string) {
-        this._attendeeKey_Input = name;
-        this.ReloadAttendeeDetails();
-        if (name === "new" || name.length > 3) {
-            this.isAvailable = true;
-        }
-        console.log("input name " + this._attendeeKey_Input);
-    }
-    get attendeeKey_Input(): string {
-        return this._attendeeKey_Input;
-    }
+    @Input() attendeeKey_Input: Subject<string>;
+
+    //set attendeeKey_Input(name: string) {
+
+    //    console.log("input name " + this._attendeeKey_Input);
+    //}
+    //get attendeeKey_Input(): string {
+    //    return this._attendeeKey_Input;
+    //}
     constructor(private _EventAudianceService: EventAudianceService
         , private router: Router
         , private activatedRoute: ActivatedRoute
@@ -48,10 +46,23 @@ export class EventAttendeeEditComponent implements OnInit {
 
     }
 
+    ngOnDestroy() {
+        this.attendeeKey_Input.unsubscribe;
+        console.log('attendee key subscriber is destroyed');
+    }
     ngOnInit() {
+        this.attendeeKey_Input.subscribe(name => {
+            if (name === "new" || name.length > 3) {
+                this._attendeeKey_Input = name;
+                this.ReloadAttendeeDetails();
+                this.isAvailable = true;
+            }
+        });
 
         this.ateendeeKey_routing = this.activatedRoute.snapshot.params['id'];
-        this.ReloadAttendeeDetails();
+        if (this.ateendeeKey_routing != null && this.ateendeeKey_routing != undefined && this.ateendeeKey_routing != '') {
+            this.ReloadAttendeeDetails();
+        }
         this.authService.currentUser().subscribe(u => this.userid = u.uid);;;
         this.isAvailable = false;
     }
@@ -75,15 +86,13 @@ export class EventAttendeeEditComponent implements OnInit {
         const save = this.isNewEvent
             ? this._EventAudianceService.saveSpeakupEvent(_eventAudience)
             : this._EventAudianceService.editSpeakupEvent(_eventAudience);
-        //save.then(_ => this.router.navigate([`app-event-list`]));
-        //this.attendeeKey_Input = "new";
+        //save.then(_ => this.router.navigate([`events/list`]));
         this.isAvailable = false;
     }
 
     removeSpeakupEvent(_eventAudience: eventAudience) {
         const save = this._EventAudianceService.removeSpeakupEvent(_eventAudience);
-        //save.then(_ => this.router.navigate([`app-event-list`]));
-        //this.attendeeKey_Input = "new";
+        //save.then(_ => this.router.navigate([`events/list`]));
         this.isAvailable = false;
     }
 

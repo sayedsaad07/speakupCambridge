@@ -11,7 +11,7 @@
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['']">Home</a></li>
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['dashboard']" *ngIf="(isLoggedIn|async)">Dashboard</a></li>
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['app-todolist']" *ngIf="(isLoggedIn|async)">To Do List</a></li>
-                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['app-event-list']" *ngIf="(isLoggedIn|async)">Speak Up Events</a></li>
+                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['events/']" *ngIf="(isLoggedIn|async)">Speak Up Events</a></li>
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['app-speak-up-cambridge-host']" *ngIf="(isLoggedIn|async)">Timer</a></li>
 
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a

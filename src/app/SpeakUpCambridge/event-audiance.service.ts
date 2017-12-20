@@ -26,10 +26,11 @@ export class EventAudianceService {
             this.userid = u.uid;
         });
         console.log("user id " + this.userid);
-        this.speakUpEventAudienace$ = this.db.list('speakUpEventAudienace');
-            //, query =>
-            //    query.orderByChild("userid").equalTo(u.uid));
-            //.map(_tasks => _tasks.filter(t => t.userid === u.uid));
+        //this.speakUpEventAudienace$ = this.db.list('speakUpEventAudienace');
+
+        //, query =>
+        //    query.orderByChild("userid").equalTo(u.uid));
+        //.map(_tasks => _tasks.filter(t => t.userid === u.uid));
         //this.speakUpEvent$ = this.db.object('speakUpEvent');
     }
 
@@ -39,9 +40,15 @@ export class EventAudianceService {
     }
 
     geteventAudienceList(eventKey: string) {
-        return this.speakUpEventAudienace$
-            .map(_tasks => _tasks.filter(t => t.eventkey === eventKey))
-            .catch(this.errorHandler);
+        this.speakUpEventAudienace$ = this.db.list('/speakUpEventAudienace', {
+            query: {
+                orderByChild: 'eventkey',
+                equalTo: eventKey
+            }
+        });
+        return this.speakUpEventAudienace$;
+        //.map(_tasks => _tasks.filter(t => t.eventkey === eventKey))
+        //.catch(this.errorHandler);
     }
 
     saveSpeakupEvent(_eventAudience: eventAudience) {
@@ -63,7 +70,40 @@ export class EventAudianceService {
             .then(_ => console.log('success'))
             .catch(error => console.log(error));
     }
+    
+    removeAllSpeakers(_eventAudiencekey: string) {
 
+        ////this.speakUpEventAudienace$;
+        ////    .map(_tasks => {
+        ////});
+        ////.catch(this.errorHandler);
+        //let ref = this.db.database.ref('/speakUpEventAudienace');
+        //var query = ref.orderByChild('eventkey').equalTo(_eventAudiencekey);
+        //query.ref.remove().then(() => console.log('removed all speakers of event' + _eventAudiencekey))
+        //    .catch((error) => console.log(error));
+
+        //ref.forEach(function (snapshot) {
+        //    snapshot.refere
+        //});
+        //this.speakUpEventAudienace$.remove(ref);
+
+        //// Query the list for the purposes of this example:
+        //list.subscribe((items) => {
+
+        //    // Remove the matching item:
+        //    if (items.length) {
+        //        for (var i = 0; i < items.length; i++) {
+        //            console.log("remove item " + items[i].$key + "event " + items[i].eventkey + "topic " + items[i].topic )
+        //            if (items[i].eventkey === _eventAudiencekey) {
+        //                list.remove(items[i].$key)
+        //                    .then(() => console.log('removed ' + items[0].$key))
+        //                    .catch((error) => console.log(error));
+        //            }
+        //        }
+
+        //    }
+        //});
+    }
     private errorHandler(error) {
         console.log(error);
         return Observable.throw(error.message);

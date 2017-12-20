@@ -31,11 +31,11 @@ import { AddonTimerComponent } from './_shared/addon-timer/addon-timer.component
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { CompanyAddComponent } from './company/company-add/company-add.component';
 import { CompanyDetailComponent } from './company/company-detail/company-detail.component';
-import { TaskEditComponent , TodolistComponent, TodolistService } from './todolist/todolist.index';
+import { TaskEditComponent, TodolistComponent, TodolistService } from './todolist/todolist.index';
 //add SpeakUpCambridgeModule
 //import { SpeakUpCambridgeModule } from './SpeakUpCambridge/speak-up-cambridge/speak-up-cambridge.module';
 import { SpeakUpCambridgeHostComponent } from './SpeakUpCambridge/speak-up-cambridge/speak-up-cambridge-host/speak-up-cambridge-host.component';
-import { EventListComponent, EventEditComponent, EventAttendeeComponent, EventListService } from  './SpeakUpCambridge/event-list.index';
+import { EventListComponent, EventEditComponent, EventAttendeeComponent, EventListService } from './SpeakUpCambridge/event-list.index';
 import { EventAttendeeEditComponent } from './SpeakUpCambridge/event-attendee-edit/event-attendee-edit.component';
 
 const routes: Routes = [
@@ -51,9 +51,23 @@ const routes: Routes = [
     {
         path: 'app-speak-up-cambridge-host', component: SpeakUpCambridgeHostComponent, canActivate: [LoggedInGuard]
     },
-    { path: 'app-event-list', component: EventListComponent, canActivate: [LoggedInGuard] },
-    { path: 'app-event-edit/:id', component: EventEditComponent, canActivate: [LoggedInGuard] },
-    { path: '', component: HomePageComponent }
+    {
+        path: 'events'
+        //, canActivateChild: [LoggedInGuard]//, component: EventListComponent, canActivate: [LoggedInGuard]
+        , children: [
+            { path: 'list', component: EventListComponent, canActivate: [LoggedInGuard] }
+            , { path: 'edit/:id', component: EventEditComponent, canActivate: [LoggedInGuard] }
+            , {
+                path: 'add', redirectTo: 'edit/new'
+            } //component: EventEditComponent, canActivate: [LoggedInGuard] }
+            , { path: '', component: EventListComponent, canActivate: [LoggedInGuard] }
+            , { path: '**', component: SpeakUpCambridgeHostComponent }
+        ]
+    }
+    ,
+    //{ path: 'app-event-edit/:id', component: EventEditComponent, canActivate: [LoggedInGuard] },
+    { path: '', redirectTo: '/events/list', pathMatch: 'full' }
+    //, { path: '**', component: HomePageComponent }
 ];
 
 @NgModule({

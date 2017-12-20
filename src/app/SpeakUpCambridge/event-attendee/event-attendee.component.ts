@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
     selector: 'app-event-attendee',
@@ -24,7 +25,7 @@ export class EventAttendeeComponent implements OnInit {
     speakupeventKey_Routing: string;
     @Input() speakupeventKey_Input: string;
     eventKey: string;
-    private currentAttendeeKey: string = '';
+    private currentAttendeeKey: Subject<string> = new Subject();
 
     constructor(private _EventAudianceService: EventAudianceService
         , private router: Router
@@ -74,7 +75,7 @@ export class EventAttendeeComponent implements OnInit {
         const save = this.isNewEvent
             ? this._EventAudianceService.saveSpeakupEvent(_eventAudience)
             : this._EventAudianceService.editSpeakupEvent(_eventAudience);
-        //save.then(_ => this.router.navigate([`app-event-list`]));
+        //save.then(_ => this.router.navigate([`events/list`]));
     }
 
     removeSpeakupEvent(_eventAudience: eventAudience) {
@@ -96,9 +97,10 @@ export class EventAttendeeComponent implements OnInit {
 
     editEventAttendee(attendeekey: string)
     {
-        this.currentAttendeeKey = attendeekey;
+        this.currentAttendeeKey.next(attendeekey);
     }
     AddNewAttendee() {
-        this.currentAttendeeKey = 'new';
+        console.log('input key is ' + this.currentAttendeeKey);
+        this.currentAttendeeKey.next('new');
     }
 }

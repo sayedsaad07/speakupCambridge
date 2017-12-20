@@ -3,7 +3,7 @@
 </p>
 <div class="row">
     <a class="btn btn-primary"
-       [routerLink]="['/app-event-edit', 'new']">Add Event</a>
+       [routerLink]="['/events/add']">Add Event</a>
     <a class="btn btn-primary"
        (click)="showDoneOnly()">Show upcoming Event</a>
     <a class="btn btn-primary"
@@ -31,7 +31,7 @@
                 <!--<td> <a class="btn btn-primary"  (click)="saveEvent(currentEvent)">Save</a> </td>-->
                 <td>
                     <a class="btn btn-primary"
-                       [routerLink]="['/app-event-edit', currentEvent.$key]">Edit</a>
+                       [routerLink]="['/events/edit', currentEvent.$key]">Edit</a>
                 </td>
             </tr>
         </tbody>

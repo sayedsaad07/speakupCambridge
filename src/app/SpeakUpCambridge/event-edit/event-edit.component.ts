@@ -27,8 +27,8 @@ export class EventEditComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private _EventListService: EventListService,
-        private authService: AuthService) {
-
+        private authService: AuthService,
+        private _EventAudianceService: EventAudianceService) {
     }
 
     ngOnInit() {
@@ -36,7 +36,8 @@ export class EventEditComponent implements OnInit {
         this.isNewEvent = this.speakupeventKey === 'new' || this.speakupeventKey === "";
         !this.isNewEvent ? this.getSpeekupEventDetails() : this.currentEvent = Observable.of({}) as FirebaseObjectObservable<speakUpEvent>;
         this.authService.currentUser().subscribe(u => this.userid = u.uid);;;
-        console.log("user id " + this.userid);
+        //console.log("user id " + this.userid);
+        //this._EventAudianceService.removeAllSpeakers(this.speakupeventKey);
     }
 
 
@@ -50,18 +51,16 @@ export class EventEditComponent implements OnInit {
     saveSpeakupEvent(speakupevent: speakUpEvent) {
         speakupevent.userid = this.userid;
         speakupevent.isDone === true ? speakupevent.isDone = true : speakupevent.isDone = false;
-        console.log("user id " + this.userid);
-        console.log("is new speakupevent " + this.isNewEvent);
-        console.log("speakupevent name " + speakupevent.name);
         const save = this.isNewEvent
             ? this._EventListService.saveSpeakupEvent(speakupevent)
             : this._EventListService.editSpeakupEvent(speakupevent);
-        save.then(_ => this.router.navigate([`app-event-list`]));
+        save.then(_ => this.router.navigate([`/events/list`]));
     }
 
     removeSpeakupEvent(speakupevent: speakUpEvent) {
-        const save = this._EventListService.removeSpeakupEvent(speakupevent);
-        save.then(_ => this.router.navigate([`app-event-list`]));
+        //this._EventAudianceService.removeAllSpeakers(speakupevent.$key);
+        const removeevent = this._EventListService.removeSpeakupEvent(speakupevent);
+        removeevent.then(_ => this.router.navigate([`/events/list`]));
     }
 
 }
